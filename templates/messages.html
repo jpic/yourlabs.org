@@ -1,0 +1,33 @@
+{% load i18n %}
+{% if site_wide_announcements %}
+<div class="grid_12 annoucements">
+    <div id="site_wide_announcements">
+        <ul class="messages">
+            {% for announcement in site_wide_announcements %}
+            <li class="info">
+                <a style="font-weight: normal; color: black; text-decoration: underline; float: none;" href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
+                <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}" class="hide_parent">
+                    <small>
+                    {% trans "hide" %}
+                    </small>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+{% if messages %}
+<div class="grid_12 messages">
+    <ul class="messages">
+        {% for message in messages %}
+        <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            <a href="#" class="hide_parent"><small>{% trans "hide" %}</small></a>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+

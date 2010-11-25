@@ -1,0 +1,13 @@
+{% extends "planet/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block body %}
+<form action="" method="POST" class="uniForm">
+    {% csrf_token %}
+    {{ form|as_uni_form }}
+
+    <div class="buttonHolder"><button type="submit" class="primaryAction">{% trans "Submit" %}</button></div>
+</form>
+{% endblock %}

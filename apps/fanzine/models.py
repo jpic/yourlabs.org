@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
+from django.core import urlresolvers
 
 class Fanzine(models.Model):
     date = models.DateTimeField(verbose_name=_(u'publication date'))
@@ -15,6 +16,14 @@ class Fanzine(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return urlresolvers.reverse('fanzine_details', kwargs={
+            'year': self.date.year,
+            'month': self.date.month,
+            'day': self.date.day,
+            'slug': self.slug
+        })
 
 class FanzinePart(models.Model):
     tag = models.ForeignKey('tagging.tag', verbose_name=_(u'tag'))

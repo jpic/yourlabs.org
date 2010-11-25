@@ -14,6 +14,12 @@ def form(request,
         raise Exception("form_class is a mandatory argument")
 
     context = {}
+    
+    print request.session, request.META
+    if 'previous_url' not in request.session.keys():
+        request.session['previous_url'] = request.META['HTTP_REFERER']
+
+    print request.session['previous_url']
 
     if request.method == 'POST':
         form = form_class(request.POST)
@@ -27,6 +33,10 @@ def form(request,
                 success_url = urlresolvers.reverse(success_url_name)
             if success_url:
                 return http.HttpResponseRedirect(success_url)
+
+            if request.session['previous_url']:
+                previous_url = request.session.pop('previous_url')
+                return http.HttpResponseRedirect(previous_url)
     else:
         form = form_class()
 

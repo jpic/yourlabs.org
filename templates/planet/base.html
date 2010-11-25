@@ -11,22 +11,39 @@
 {% endblock %}
 
 {% block menu %}
-    <h4>{% trans 'Browse' %}</h4>
+    <h2>
+        <a href="{% url home %}" title="{% trans 'yourlabs.org technology and business scouting' %}">
+            {% trans 'yourlabs.org technology and business scouting' %}
+        </a>
+    </h2>
+
+    <h4>{% trans 'editions' %}</h4>
     <ul>
         <li>
-            <a href="{% url planet_post_list %}">{% trans 'Posts' %}</a>
+            <a href="{% url home %}" title="{% trans "view the current edition" %}">
+                {% trans "current" %}
+            </a>
+        </li>
+    </ul>
+
+    <h4>{% trans 'all contents' %}</h4>
+
+    <ul>
+        <li>
+            <a href="{% url planet_post_list %}" title="{% trans "uncensored, real time, information about IT development and business" %}">
+                {% trans 'real time' %}</a>
         </li>
         <li>
-            <a href="{% url planet_author_list %}">{% trans 'Authors' %}</a>
+            <a title="{% trans "IT development and business authors" %}" href="{% url planet_author_list %}">{% trans 'authors' %}</a>
         </li>
         <li>
-            <a href="{% url planet_blog_list %}">{% trans 'Blogs' %}</a>
+            <a title="{% trans "IT development and business blogs" %}" href="{% url planet_blog_list %}">{% trans 'blogs' %}</a>
         </li>
         <li>
-            <a href="{% url planet_feed_list %}">{% trans 'Feeds' %}</a>
+            <a title="{% trans "IT development and business feeds" %}" href="{% url planet_feed_list %}">{% trans 'feeds' %}</a>
         </li>
         <li>
-            <a href="{% url planet_tag_cloud %}">{% trans 'Tag Cloud' %}</a>
+            <a title="{% trans "IT development and business tags" %}" href="{% url planet_tag_cloud %}">{% trans 'tag cloud' %}</a>
         </li>
         {% block menu_extra %}
         {% endblock %}
@@ -35,9 +52,9 @@
 
 {% block search %}
     <form name="search_form" id="search_form" action="{% url planet_search %}" method="GET">
-        <label>{% trans 'Search in' %}</label>
+        <label>{% trans 'search in' %}</label>
         {{ search_form }}
-        <button name="search" value="go">{% trans 'ok' %}</button>
+        <button name="search" value="go">{% trans 'go' %}</button>
     </form>
 {% endblock %}
 

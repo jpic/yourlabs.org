@@ -4,5 +4,7 @@
 --requirement=base.txt
 -e https://github.com/matagus/django-planet.git#egg=planet
 django-admin-tools
+announcements
+pinax
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.

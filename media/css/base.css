@@ -100,7 +100,7 @@ code
 
 #search { margin-top: 10px; margin-top: 1.6em; margin-bottom: 1.8em; float: right;}
 #nav{ float: right; width: 400px; }
-#footer { clear: both; text-align: center; padding-top: 30px; font-size: .8em; }
+#footer { clear: both; text-align: center;  font-size: .8em; }
 
 /* TYPE BASE */              
 label, p, ul, ol, pre { font-size: 1em; margin: 0 0 1.0em; }
@@ -123,7 +123,6 @@ a:link, a:visited {
     /* 76d5ff 3c94bc 3e4d5c 66bbe0 */
     color: #2e9306;
     text-decoration: none;
-    font-weight: bold;
 }
 /*a:hover { color: #33493c; }*/
 /*h3 a:hover, h3 a:link, h3 a:visited { font-weight: 100; color: #33493c;}*/
@@ -160,3 +159,60 @@ ul.author.list ul.feeds.list li { display: inline; }
 
 #navigation_bar ul li { padding: 3px 0; }
 #navigation_bar ul li a { text-transform: uppercase; }
+
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: red;
+}
+
+
+/* MESSAGES */
+
+ul.messages {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+}
+ul.messages li {
+    padding: 5px 10px;
+    background: #EFD;
+    border: 1px solid #BC9;
+}
+ul.messages li a {
+    float: right;
+    color: #693;
+}
+ul.messages .debug {
+    background: #EEE;
+    border: 1px solid #BBB;
+}
+ul.messages .info {
+    background: #ffffcf;
+    border: 1px solid #d3d100;
+}
+ul.messages .success {
+    background: #EFD;
+    border: 1px solid #BC9;
+}
+ul.messages .warning {
+    background: #FED;
+    border: 1px solid #CB9;
+}
+ul.messages .error {
+    background: #FDD;
+    border: 1px solid #C99;
+}
+
+ul.messages {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+}
+ul.messages li a {
+    float: right;
+    color: #693;
+}
+
+

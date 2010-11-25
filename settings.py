@@ -145,6 +145,7 @@ INSTALLED_APPS = [
     'pinax.templatetags',
     'pinax.apps.account',
     'emailconfirmation',
+    'mailer',
     
     # external
     'staticfiles',
@@ -160,6 +161,7 @@ INSTALLED_APPS = [
     'fanzine',
     'multilingual',
     'announcements',
+    'uni_form',
 ]
 
 # planet
@@ -185,6 +187,15 @@ EMAIL_BACKEND = 'mailer.backend.DbBackend'
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+
+ACCOUNT_OPEN_SIGNUP = True
+ACCOUNT_REQUIRED_EMAIL = False
+ACCOUNT_EMAIL_VERIFICATION = False
+ACCOUNT_EMAIL_AUTHENTICATION = False
+ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
+EMAIL_CONFIRMATION_DAYS = 2
+EMAIL_DEBUG = DEBUG
+
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

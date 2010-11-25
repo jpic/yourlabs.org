@@ -9,8 +9,6 @@ admin.autodiscover()
 
 handler500 = "pinax.views.server_error"
 
-import forms
-
 urlpatterns = patterns("",
     url(r"^$", 'fanzine.views.current_fanzine_details', {
     }, name="home"),
@@ -18,20 +16,13 @@ urlpatterns = patterns("",
     url(r"^planet/", include("planet.urls")),
     #url(r"^fanzine/", include("fanzine.urls")),
     url(
-        r'^(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/(?P<slug>\w+)/$',
-        'fanzine_details',
+        r'^(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/(?P<slug>[a-zA-Z0-9-]+)/$',
+        'fanzine.views.fanzine_details',
         name='fanzine_details',
     ),
     url(r'^admin_tools/', include('admin_tools.urls')),
-    url(
-        r"^subscription/$", 
-        "views.form", 
-        {
-            'form_class': forms.SubscriptionForm,
-            'success_message': _('your subscription is done! thanks for choosing yourlabs'),
-        }, 
-        name="subscription_form"
-    ),
+    url(r"^announcements/", include("announcements.urls")),
+    url(r"^account/", include("pinax.apps.account.urls")),
 )
 
 

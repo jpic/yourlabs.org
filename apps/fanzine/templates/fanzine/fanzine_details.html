@@ -26,10 +26,14 @@ ol.posts li {
 {% block body %}
 <div class="fanzine_details">
     <span class="date">
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">
         {{ object.date.year }}/{{ object.date.month }}/{{ object.date.day }}
+        </a> 
     </span>
     <h1>
-        {{ object.title|striptags|safe }}
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">
+            {{ object.title|striptags|safe }}
+        </a>
     </h1>
     <div class="content">
         {{ object.text }}
@@ -39,10 +43,12 @@ ol.posts li {
     {% for part in object.fanzinepart_set.all %}
         <div class="part">
             <h2 class="title">
-                {{ part.tag }}
+                <a href="{% url planet_tag_detail part.tag.name %}" title="{% trans 'see all posts tagged' %} '{{ part.tag.name }}'">
+                    {{ part.tag }}
+                </a>
             </h2>
             <p class="text">
-                {{ part.text }}
+                {{ part.text|safe }}
             </p>
             <ol class="posts">
             {% for partpost in part.fanzinepartpost_set.all %}

@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <div class="box">
-    <h2>
+    <span class="title">
         {% trans "you found" %}
-    </h2>
+    </span>
     
     <p>
     {% trans "a source of highly effective information about business and technology directed to IT professionnals whom want to improve their enterprise outcome" %}
@@ -11,9 +11,9 @@
 </div>
 
 <div class="box">
-    <h2>
+    <span class="title">
         {% trans "we are" %}
-    </h2>
+    </span>
 
     <p>
     {% trans "a master mind group of passionnate IT professionnals on a mission: contribute to businesses and lifes" %}
@@ -21,37 +21,69 @@
 </div>
 
 <div class="box">
-    <h2>
+    <span class="title">
         {% trans "take action" %}
-    </h2>
+    </span>
 
+    {% if subscription_form_status != 'passed' %}
     <p>
     {% trans "insert your email below to get our free reports and be notified of our latest news" %}
     </p>
     
-    <form action="{% url subscription_form %}" method="POST">
+    <form method="POST">
         {% csrf_token %}
 
-        <label for="id_email">
+        {% if subscription_form_status == 'failed' %}
+        <p class="errorField">
+            {% trans "your subscription will be saved when the fields are properly filled, thanks for choosing yourlabs.org" %}
+        </p>
+        {% endif %}
+
+        {% if form.non_field_errors %}
+        <div id="errorMsg">
+              <ul>
+                {{ form.non_field_errors|unordered_list }}
+             </ul>
+        </div>
+        {% endif %}
+
+        <label for="id_email" class="{% if subscription_form.email.errors %}errorField{% endif %}">
             {% trans "Email" %}:
         </label>
         
-        <div class="clear"></div>
+        <br />
+
+        {% for error in subscription_form.email.errors %}
+            <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="errorField">
+                {{ error }}
+            </p>
+        {% endfor %}
 
         {{ subscription_form.email }}
-        
-        <div class="clear"></div>
+
+        <br />
 
         <label for="id_infrastructure">
             {% trans "do you want to be informed about our infrastructure status as well ? server maintenance, new services etc ..." %}
         </label>
 
-        {{ subscription_form.infrastructure }}
+        {% for error in subscription_form.infrastructure.errors %}
+            <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="errorField">
+                {{ error }}
+            </p>
+        {% endfor %}
 
-        <div class="clear"></div>
+        {{ subscription_form.infrastructure }}
         
+        <input type="hidden" name="subscription_form" value="1" />
+
         <input type="submit" value="{% trans "subscribe" %}" name="authenticate" />
     </form>
 
+    {% else %}
+    <p>
+        {% trans "thanks for taking action" %}
+    </p>
+    {% endif %}
 </div>
 
