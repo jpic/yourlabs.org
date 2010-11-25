@@ -6,10 +6,52 @@ from planet import models as planet_models
 
 from models import *
 
-class FanzinePostInline(admin.StackedInline):
-    model = FanzinePost
+class FanzinePartPostInline(admin.StackedInline):
+    model = FanzinePartPost
     raw_id_fields = (
         'post',
+    )
+
+class FanzinePartAdminForm(forms.ModelForm):
+    model = FanzinePart
+
+    class Media:
+        js = (
+            settings.STATIC_URL + 'js/jquery-1.4.2.min.js',
+            settings.STATIC_URL + 'js/jquery-ui-1.8.6.fanzine.min.js',
+            settings.STATIC_URL + 'js/menu-sort.js',
+        )
+
+class FanzinePartAdmin(admin.ModelAdmin):
+    form = FanzinePartAdminForm
+    list_display = (
+        'pk',
+        'fanzine',
+        'tag',
+        'text',
+    )
+    list_display_links = (
+        'pk',
+    )
+    search_fields = (
+        'text',
+    )
+    list_filter = (
+        'fanzine',
+    )
+    inlines = (
+        FanzinePartPostInline,
+    )
+    raw_id_fields = (
+        'tag',
+        'fanzine',
+    )
+
+
+class FanzinePartInline(admin.StackedInline):
+    model = FanzinePart
+    raw_id_fields = (
+        'tag',
     )
 
 class FanzineAdminForm(forms.ModelForm):
@@ -26,16 +68,15 @@ class FanzineAdmin(admin.ModelAdmin):
     form = FanzineAdminForm
     list_display = (
         'date',
-        'editorial_author',
         'title',
-        'editorial',
+        'text',
     )
     list_display_links = (
         'title',
     )
     search_fields = (
         'title',
-        'editorial',
+        'text',
     )
     list_filter = (
         'date',
@@ -44,7 +85,8 @@ class FanzineAdmin(admin.ModelAdmin):
         'date',
     )
     inlines = (
-        FanzinePostInline,
+        FanzinePartInline,
     )
 
 admin.site.register(Fanzine, FanzineAdmin)
+admin.site.register(FanzinePart, FanzinePartAdmin)

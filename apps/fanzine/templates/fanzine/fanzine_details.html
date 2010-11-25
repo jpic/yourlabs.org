@@ -2,23 +2,57 @@
 
 {% load i18n %}
 
+{% block extrastyle %}
+{{ block.super }}
+<style type="text/css">
+ol.posts {
+    margin-left: 0;
+}
+ol.posts li {
+    margin-left: 2em;
+    margin-bottom: 0.1em;
+    list-style-type: upper-roman;
+}
+.part h2.title {
+    text-align: center;
+}
+.fanzine_details span.date {
+    float: right;
+    font-size: 80%;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 <div class="fanzine_details">
-    <h1>{{ object.title|striptags|safe }}</h1>
-    <div class="content">
-        {{ object.editorial }}
-    </div>
     <span class="date">
-        {{ object.date }}
+        {{ object.date.year }}/{{ object.date.month }}/{{ object.date.day }}
     </span>
-    <div class="posts">
-    {% for post in object.fanzinepost_set.all %}
-        <div class="post">
-            <h3 class="post-title">
-                <a class="permalink" href="{{ post.post.get_absolute_url }}" title="{{ post.title|striptags|safe }}">
-                {{ post.post.title }}
-                </a>
-            </h3>
+    <h1>
+        {{ object.title|striptags|safe }}
+    </h1>
+    <div class="content">
+        {{ object.text }}
+    </div>
+    
+    <div class="parts">
+    {% for part in object.fanzinepart_set.all %}
+        <div class="part">
+            <h2 class="title">
+                {{ part.tag }}
+            </h2>
+            <p class="text">
+                {{ part.text }}
+            </p>
+            <ol class="posts">
+            {% for partpost in part.fanzinepartpost_set.all %}
+                <li class="post">
+                    <a href="{{ partpost.post.url }}" title="{{ partpost.post.title }}">
+                        {{ partpost.post.title }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ol>
         </div>
     {% endfor %}
     </div>
