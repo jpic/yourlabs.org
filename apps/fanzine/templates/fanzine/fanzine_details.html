@@ -1,0 +1,26 @@
+{% extends 'fanzine/base.html' %}
+
+{% load i18n %}
+
+{% block body %}
+<div class="fanzine_details">
+    <h1>{{ object.title|striptags|safe }}</h1>
+    <div class="content">
+        {{ object.editorial }}
+    </div>
+    <span class="date">
+        {{ object.date }}
+    </span>
+    <div class="posts">
+    {% for post in object.fanzinepost_set.all %}
+        <div class="post">
+            <h3 class="post-title">
+                <a class="permalink" href="{{ post.post.get_absolute_url }}" title="{{ post.title|striptags|safe }}">
+                {{ post.post.title }}
+                </a>
+            </h3>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load i18n tagging_tags planet_tags %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+    <title>{% block page_title %}{{ site.name }}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="description" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." />
+	<meta name="keywords" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." />
+	<meta name="robots" content="index, follow" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/screen.css" media="screen" />
+    {% block extrameta %}
+    <meta name="DC.title" content="{{ site.name }}" />
+    {% endblock %}
+    <meta http-equiv="content-language" content="en" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8">
+    <link href="{{ STATIC_URL }}icons/shortcut.ico" rel="SHORTCUT ICON">
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="{% url planet_foaf %}" /> 
+    {% block head_feeds %}
+    {% endblock %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    <style type="text/css">
+.col2 {
+    padding-top: 60px;
+    text-align: right;
+}
+.col3 {
+    padding-top: 60px;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="colmask threecol">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1">
+				<!-- Column 1 start -->
+                {% block body %}
+                {% block content %}
+                {% endblock %}
+                {% endblock body %}
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2">
+				<!-- Column 2 start -->
+                {% block menu %}
+                {% block menu_extra %}
+                {% endblock %}
+                {% endblock %}
+                {% block search %}
+                {% endblock %}
+				<!-- Column 2 end -->
+			</div>
+			<div class="col3">
+				<!-- Column 3 start -->
+                {% include "subscription.html" %}
+                {% block right_column %}
+                {% endblock %}
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+       <div class="linklist">
+            <h3>{% trans "internationnal consulting" %}</h3>
+            <ul>
+                <li>
+                    <a href="http://gg.ee" title="eZ Publish">
+                        eZ Publish (ee)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://qafoo.com" title="PHP {% trans "quality expertise" %}">
+                        PHP {% trans "quality expertise" %} (gr)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://derickrethans.nl" title="PHP {% trans "core development" %}">
+                        PHP {% trans "core development" %} (nl)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://grenlandweb.no" title="{% trans "norway" %} {% trans "web agency" %}">
+                        {% trans "web agency" %} (no)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://es.linkedin.com/in/alejandrocapparelli" title="{% trans "communication" %}">
+                        {% trans "communication" %} (es)
+                    </a>
+                </li>
+            </ul>
+
+            <h3>{% trans "internationnal partners" %}</h3>
+            <ul>
+                <li>
+                    <a href="http://fengoffice.com" title="Feng office">
+                        Feng office (ug)
+                    </a>
+                </li>
+                <li>
+                    <a href="http://paris-offshore.fr" title="{% trans "Offshore and onshore accounting services" %}">
+                        Paris-Offshore (fr)
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="linklist">
+            <h3>{% trans "french consulting" %}</h3>
+            <ul>
+                <li>
+                    <a href="http://emonnerot.chocolatpistache.com/" title="{% trans "computer graphics" %}">
+                        {% trans "computer graphics" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://daxey.net" title="{% trans "development" %}">
+                        {% trans "development" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://pistil-design.net" title="{% trans "marketing" %}">
+                        {% trans "marketing" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://blobidesign.net" title="{% trans "design" %}">
+                        {% trans "design" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://neoskills.net" title="{% trans "system administration" %}">
+                        {% trans "system administration" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://fr.linkedin.com/pub/marc-poussin/3/760/20b" title="{% trans "attorney" %}">
+                        {% trans "attorney" %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="linklist">
+            <h3>{% trans "pleasure" %}</h3>
+            <ul>
+                <li>
+                    <a href="http://idyoulo.com" title="{% trans "world music" %}">
+                        {% trans "world music" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://madeleinemarket.com" title="{% trans "delicatessen" %}">
+                        {% trans "delicatessen" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.playlistnow.fm/" title="{% trans "music playlists" %}">
+                        {% trans "music playlists" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.prix-litteraires.net/" title="{% trans "literary awards" %}">
+                        {% trans "literary awards" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://chocspace.com" title="{% trans "chocspace" %}">
+                        chocspace
+                    </a>
+                </li>
+            </ul>
+        </div>
+     </div>
+</div>
+
+
+</body>
+</html>

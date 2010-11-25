@@ -1,0 +1,57 @@
+{% load i18n %}
+
+<div class="box">
+    <h2>
+        {% trans "you found" %}
+    </h2>
+    
+    <p>
+    {% trans "a source of highly effective information about business and technology directed to IT professionnals whom want to improve their enterprise outcome" %}
+    </p>
+</div>
+
+<div class="box">
+    <h2>
+        {% trans "we are" %}
+    </h2>
+
+    <p>
+    {% trans "a master mind group of passionnate IT professionnals on a mission: contribute to businesses and lifes" %}
+    </p>
+</div>
+
+<div class="box">
+    <h2>
+        {% trans "take action" %}
+    </h2>
+
+    <p>
+    {% trans "insert your email below to get our free reports and be notified of our latest news" %}
+    </p>
+    
+    <form action="{% url subscription_form %}" method="POST">
+        {% csrf_token %}
+
+        <label for="id_email">
+            {% trans "Email" %}:
+        </label>
+        
+        <div class="clear"></div>
+
+        {{ subscription_form.email }}
+        
+        <div class="clear"></div>
+
+        <label for="id_infrastructure">
+            {% trans "do you want to be informed about our infrastructure status as well ? server maintenance, new services etc ..." %}
+        </label>
+
+        {{ subscription_form.infrastructure }}
+
+        <div class="clear"></div>
+        
+        <input type="submit" value="{% trans "subscribe" %}" name="authenticate" />
+    </form>
+
+</div>
+
