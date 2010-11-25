@@ -9,7 +9,7 @@ from models import *
 def current_fanzine_details(request,
     template_name='fanzine/fanzine_details.html', extra_context=None):
 
-    object = Fanzine.objects.filter(date__lte=date.today()).latest()
+    object = Fanzine.objects.filter(date__lte=datetime.now()).latest()
 
     context = {
         'object': object,
