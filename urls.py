@@ -23,6 +23,11 @@ urlpatterns = patterns("",
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r"^announcements/", include("announcements.urls")),
     url(r"^account/", include("pinax.apps.account.urls")),
+    url(r"^notices/", include("notification.urls")),
+    url(r"^comments/", include("threadedcomments.urls")),
+    url(r"^i18n/", include("django.conf.urls.i18n")),
+    url(r"^announcements/", include("announcements.urls")),
+    url(r"^blog/", include("pinax.apps.blog.urls")),
 )
 
 

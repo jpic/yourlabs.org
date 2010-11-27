@@ -153,7 +153,14 @@ INSTALLED_APPS = [
     'debug_toolbar',
     
     # Pinax
-    
+    "pinax.apps.blog",
+    "django_markup",
+    "threadedcomments",
+    "pinax.apps.threadedcomments_extras",
+    "avatar",
+    "friends",
+    "tagging_ext",
+    "ajax_validation",
     # project
     'django_extensions',
     'planet',
@@ -163,12 +170,21 @@ INSTALLED_APPS = [
     'announcements',
     'uni_form',
     'notification',
+    'overload',
 ]
 
 # planet
 LANGUAGE_COOKIE_NAME = 'planetlng'
 SESSION_COOKIE_NAME = 'planetid'
 USER_AGENT = 'django-planet/0.1'
+
+MARKUP_FILTER_FALLBACK = "none"
+MARKUP_CHOICES = [
+    ("restructuredtext", u"reStructuredText"),
+    ("textile", u"Textile"),
+    ("markdown", u"Markdown"),
+    ("creole", u"Creole"),
+]
 
 LANGUAGES = (
     ('en', u'English'),
