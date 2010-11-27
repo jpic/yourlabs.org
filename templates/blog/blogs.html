@@ -22,8 +22,6 @@
     <h1>{% trans "All Blogs" %}</h1>
 
     {% if blogs %}
-        <p>{% trans "These are blog posts from everyone:" %}</p>
-
         {% autopaginate blogs %}
 
             {% for blog_post in blogs %}
