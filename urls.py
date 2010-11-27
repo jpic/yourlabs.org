@@ -9,6 +9,12 @@ admin.autodiscover()
 
 handler500 = "pinax.views.server_error"
 
+from pinax.apps.blog.feeds import BlogFeedAll, BlogFeedUser
+blogs_feed_dict = {"feed_dict": {
+    "all": BlogFeedAll,
+    "only": BlogFeedUser,
+}}
+
 urlpatterns = patterns("",
     url(r"^$", 'fanzine.views.current_fanzine_details', {
     }, name="home"),
@@ -28,6 +34,7 @@ urlpatterns = patterns("",
     url(r"^i18n/", include("django.conf.urls.i18n")),
     url(r"^announcements/", include("announcements.urls")),
     url(r"^blog/", include("pinax.apps.blog.urls")),
+    url(r"^feeds/posts/(.*)/$", "django.contrib.syndication.views.feed", blogs_feed_dict),
 )
 
 
