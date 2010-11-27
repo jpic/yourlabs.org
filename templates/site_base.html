@@ -10,15 +10,19 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/screen.css" media="screen" />
-    {% block extrameta %}
+{% block extrameta %}
     <meta name="DC.title" content="{{ site.name }}" />
-    {% endblock %}
+    <meta name="generator" content="django-planet http://github.com/matagus/django-planet/tree">
+{% endblock %}    
     <meta http-equiv="content-language" content="en" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8">
     <link href="{{ STATIC_URL }}icons/shortcut.ico" rel="SHORTCUT ICON">
     <link rel="meta" type="application/rdf+xml" title="FOAF" href="{% url planet_foaf %}" /> 
-    {% block head_feeds %}
-    {% endblock %}
+
+{% block head_feeds %}
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {% trans "All incoming news" %}" href="{% url planet_rss_feed %}" />
+{% endblock %}
+
     {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
     <style type="text/css">
@@ -54,20 +58,89 @@ div.box span.title {
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->
-                {% block menu %}
-                {% block menu_extra %}
-                {% endblock %}
-                {% endblock %}
-                {% block search %}
-                {% endblock %}
+
+{% block menu %}
+    <h2>
+        <a href="{% url home %}" title="{% trans 'yourlabs.org technology and business scouting' %}">
+            {% trans 'yourlabs.org technology and business scouting' %}
+        </a>
+    </h2>
+
+    <h4>{% trans 'editions' %}</h4>
+    <ul>
+        <li>
+            <a href="{% url home %}" title="{% trans "view the current edition" %}">
+                {% trans "current" %}
+            </a>
+        </li>
+    </ul>
+
+    <h4>{% trans 'all contents' %}</h4>
+
+    <ul>
+        <li>
+            <a href="{% url planet_post_list %}" title="{% trans "uncensored, real time, information about IT development and business" %}">
+                {% trans 'real time' %}</a>
+        </li>
+        <li>
+            <a title="{% trans "IT development and business authors" %}" href="{% url planet_author_list %}">{% trans 'authors' %}</a>
+        </li>
+        <li>
+            <a title="{% trans "IT development and business blogs" %}" href="{% url planet_blog_list %}">{% trans 'blogs' %}</a>
+        </li>
+        <li>
+            <a title="{% trans "IT development and business feeds" %}" href="{% url planet_feed_list %}">{% trans 'feeds' %}</a>
+        </li>
+        <li>
+            <a title="{% trans "IT development and business tags" %}" href="{% url planet_tag_cloud %}">{% trans 'tag cloud' %}</a>
+        </li>
+        {% block menu_extra %}
+        {% endblock %}
+    </ul>
+{% endblock %}
+
+{% block search %}
+    <form name="search_form" id="search_form" action="{% url planet_search %}" method="GET">
+        <label>{% trans 'search in' %}</label>
+        {{ search_form }}
+        <button name="search" value="go">{% trans 'go' %}</button>
+    </form>
+{% endblock %}
 				<!-- Column 2 end -->
 			</div>
 			<div class="col3">
 				<!-- Column 3 start -->
                 {% include "subscription.html" %}
-                {% block right_column %}
+{% block right_column %}
+    {% tag_cloud_for_model planet.Post as tags_cloud with steps=7 min_count=5 distribution=log %}
+    {% include 'planet/tags/blocks/cloud.html' %}
+
+    <div id="buttons">
+        <ul>
+            <li>
+                {% block rss_feed %}
+                <a href="{% url planet_rss_feed %}" title="{% trans 'Suscribe to RSS feed' %}">
+                    <img src="{{ MEDIA_URL }}images/rss20.png" alt="RSS 2.0 Feed"/>
+                </a>
                 {% endblock %}
-				<!-- Column 3 end -->
+                </li>
+            <li>
+                {% block atom_feed %}
+                {% endblock %}
+            </li>
+            <li>
+                <a href="{% url planet_opml %}" title="OPML">
+                    <img src="{{ MEDIA_URL }}images/button-opml.png"/>
+                </a>
+            </li>
+            <li>
+                <a href="{% url planet_foaf %}" title="FOAF">
+                    <img src="{{ MEDIA_URL }}images/button-foaf.png"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}				<!-- Column 3 end -->
 			</div>
 		</div>
 	</div>

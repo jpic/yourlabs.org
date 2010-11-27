@@ -1,62 +1,10 @@
 {% extends 'site_base.html' %}
 {% load i18n tagging_tags planet_tags %}
 
-{% block extrameta %}
-    <meta name="DC.title" content="{{ site.name }}" />
-    <meta name="generator" content="django-planet http://github.com/matagus/django-planet/tree">
-{% endblock %}
-
 {% block head_feeds %}
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - RSS 2.0 Feed" href="{% url planet_rss_feed %}" />
 {% endblock %}
 
-{% block menu %}
-    <h2>
-        <a href="{% url home %}" title="{% trans 'yourlabs.org technology and business scouting' %}">
-            {% trans 'yourlabs.org technology and business scouting' %}
-        </a>
-    </h2>
-
-    <h4>{% trans 'editions' %}</h4>
-    <ul>
-        <li>
-            <a href="{% url home %}" title="{% trans "view the current edition" %}">
-                {% trans "current" %}
-            </a>
-        </li>
-    </ul>
-
-    <h4>{% trans 'all contents' %}</h4>
-
-    <ul>
-        <li>
-            <a href="{% url planet_post_list %}" title="{% trans "uncensored, real time, information about IT development and business" %}">
-                {% trans 'real time' %}</a>
-        </li>
-        <li>
-            <a title="{% trans "IT development and business authors" %}" href="{% url planet_author_list %}">{% trans 'authors' %}</a>
-        </li>
-        <li>
-            <a title="{% trans "IT development and business blogs" %}" href="{% url planet_blog_list %}">{% trans 'blogs' %}</a>
-        </li>
-        <li>
-            <a title="{% trans "IT development and business feeds" %}" href="{% url planet_feed_list %}">{% trans 'feeds' %}</a>
-        </li>
-        <li>
-            <a title="{% trans "IT development and business tags" %}" href="{% url planet_tag_cloud %}">{% trans 'tag cloud' %}</a>
-        </li>
-        {% block menu_extra %}
-        {% endblock %}
-    </ul>
-{% endblock %}
-
-{% block search %}
-    <form name="search_form" id="search_form" action="{% url planet_search %}" method="GET">
-        <label>{% trans 'search in' %}</label>
-        {{ search_form }}
-        <button name="search" value="go">{% trans 'go' %}</button>
-    </form>
-{% endblock %}
 
 {% block right_column %}
     {% tag_cloud_for_model planet.Post as tags_cloud with steps=7 min_count=5 distribution=log %}
