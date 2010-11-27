@@ -1,6 +1,7 @@
 {% extends 'fanzine/base.html' %}
 
 {% load i18n %}
+{% load markup %}
 
 {% block extrastyle %}
 {{ block.super }}
@@ -23,6 +24,12 @@ ol.posts li {
 </style>
 {% endblock %}
 
+{% block extrameta %}
+{{ block.super }}
+<meta name="description" content="{{ object.text|capfirst }}" />
+<meta name="keywords" content="{% for part in object.fanzinepart_set.all %}{{ part.tag }},{% endfor %}" />
+{% endblock %}
+
 {% block body %}
 <div class="fanzine_details">
     <span class="date">
@@ -32,11 +39,11 @@ ol.posts li {
     </span>
     <h1>
         <a href="{{ object.get_absolute_url }}" title="{{ object.title }}">
-            {{ object.title|striptags|safe }}
+            {{ object.title|striptags|safe|capfirst }}
         </a>
     </h1>
     <div class="content">
-        {{ object.text }}
+        {{ object.text|capfirst|markdown }}
     </div>
     
     <div class="parts">
@@ -44,16 +51,16 @@ ol.posts li {
         <div class="part">
             <h2 class="title">
                 <a href="{% url planet_tag_detail part.tag.name %}" title="{% trans 'see all posts tagged' %} '{{ part.tag.name }}'">
-                    {{ part.tag }}
+                    {{ part.tag|capfirst }}
                 </a>
             </h2>
             <p class="text">
-                {{ part.text|safe }}
+                {{ part.text|capfirst|markdown }}
             </p>
             <ol class="posts">
             {% for partpost in part.fanzinepartpost_set.all %}
                 <li class="post">
-                    <a href="{{ partpost.post.url }}" title="{{ partpost.post.title }}">
+                    <a href="{{ partpost.post.url }}" title="{{ partpost.post.title }} {% trans "posted on" %} {{ partpost.post.feed.title }}">
                         {{ partpost.post.title }}
                     </a>
                 </li>
