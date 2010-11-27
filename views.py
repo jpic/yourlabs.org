@@ -1,7 +1,29 @@
+import re
+
 from django import shortcuts
 from django import template
 from django import http
 from django.core import urlresolvers
+from django.db import models
+
+from planet import views as planet_views
+
+def planet_post_detail(request, post_id):
+    Post = models.get_model('planet', 'post')
+    post = shortcuts.get_object_or_404(Post, pk=post_id)
+
+    absolute_url = re.sub('http://[^/]*', '', post.url)
+    print absolute_url
+
+    try:
+        result = urlresolvers.resolve(absolute_url)
+        print result
+        return http.HttpResponseRedirect(absolute_url)
+    except urlresolvers.Resolver404:
+        pass
+
+    return shortcuts.render_to_response("planet/posts/detail.html", {"post": post},
+        context_instance=RequestContext(request))
 
 def form(request, 
          form_class=None, 

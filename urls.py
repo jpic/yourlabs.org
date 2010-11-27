@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import admin
 admin.autodiscover()
 
+import views
 
 handler500 = "pinax.views.server_error"
 
@@ -19,6 +20,7 @@ urlpatterns = patterns("",
     url(r"^$", 'fanzine.views.current_fanzine_details', {
     }, name="home"),
     url(r"^admin/", include(admin.site.urls)),
+    url(r'^planet/posts/(?P<post_id>\d+)/$', views.planet_post_detail, name="planet_post_detail"),
     url(r"^planet/", include("planet.urls")),
     #url(r"^fanzine/", include("fanzine.urls")),
     url(
