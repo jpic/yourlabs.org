@@ -123,8 +123,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'pinax.core.context_processors.pinax_settings',
     'planet.context_processors.context',
     'context_processors.global_context',
-    'multilingual.context_processors.multilingual',
     'announcements.context_processors.site_wide_announcements',
+    'notification.context_processors.notification',
 
 ]
 
@@ -141,6 +141,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.humanize',
+    'django.contrib.markup',
     
     'pinax.templatetags',
     'pinax.apps.account',
@@ -159,9 +160,9 @@ INSTALLED_APPS = [
     'tagging',
     'pagination',
     'fanzine',
-    'multilingual',
     'announcements',
     'uni_form',
+    'notification',
 ]
 
 # planet
@@ -195,7 +196,7 @@ ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
-
+NOTIFICATION_LANGUAGE_MODULE = "account.Account"
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
