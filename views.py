@@ -13,11 +13,9 @@ def planet_post_detail(request, post_id):
     post = shortcuts.get_object_or_404(Post, pk=post_id)
 
     absolute_url = re.sub('http://[^/]*', '', post.url)
-    print absolute_url
 
     try:
         result = urlresolvers.resolve(absolute_url)
-        print result
         return http.HttpResponseRedirect(absolute_url)
     except urlresolvers.Resolver404:
         pass
