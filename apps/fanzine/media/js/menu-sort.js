@@ -6,11 +6,8 @@ jQuery(function($) {
         items: 'div.inline-related', 
         update: function() {
             $(this).find('div.inline-related').each(function(i) {
-                console.log($(this))
-                console.log($(this).find('input[id$=id]'), $(this).find('input[id$=id]').val())
                 if ($(this).find('input[id$=id]').val()) {
                     $(this).find('input[id$=order]').val(i+1);
-                    console.log($(this).find('input[order$=order]'), $(this).find('input[id$=order]').val())
                 }
         });
         }
