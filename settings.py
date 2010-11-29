@@ -125,7 +125,11 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'context_processors.global_context',
     'announcements.context_processors.site_wide_announcements',
     'notification.context_processors.notification',
-
+    
+    'fanzine.context_processors.next_fanzines',
+    'fanzine.context_processors.previous_fanzines',
+    'context_processors.previous_posts',
+    'context_processors.next_posts',
 ]
 
 INSTALLED_APPS = [
