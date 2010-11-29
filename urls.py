@@ -10,7 +10,7 @@ import views
 
 handler500 = "pinax.views.server_error"
 
-from pinax.apps.blog.feeds import BlogFeedAll, BlogFeedUser
+from feeds import BlogFeedAll, BlogFeedUser
 blogs_feed_dict = {"feed_dict": {
     "all": BlogFeedAll,
     "only": BlogFeedUser,
