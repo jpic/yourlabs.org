@@ -72,7 +72,6 @@ body {
 .post-img p { margin-left: 3.8em; line-height: 1.4em; }
 .post-img { float: left; margin: 0.3em 0 1.2em -6.0em; }
 
-.post li { padding-bottom: .6em; }
 .post ol li { list-style: decimal; }
 
 /* CODE */
@@ -97,7 +96,7 @@ code
 
 #header, #footer
 {
-	margin-left: 80px;
+	padding-left: 80px;
 	width: 960px;
 	margin-bottom: 15px;
     padding-bottom: 1.0em;
@@ -118,6 +117,12 @@ h1 { margin: 0.25em 0 .2em; font-size: 2.3em; letter-spacing: -0.025em; line-hei
 h3 { font-size: 1.1em; margin-bottom: 0.25em; font-weight: normal; }
 h4 { font-size: 0.875em; }
 label, p, li { font-size: .9em; line-height: 1.4em; }
+.col1 ol, .col1 li {
+    margin-left: 1em;
+}
+.col1 li {
+    list-style-type: square;
+}
 
 /* TYPE SPECIFIC */
 .post p { font-size: 0.9em; line-height: 1.2em;}
