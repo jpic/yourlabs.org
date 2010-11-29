@@ -30,7 +30,7 @@
     {% trans "insert your email below to get our free reports and be notified of our latest news" %}
     </p>
     
-    <form method="POST">
+    <form method="post" action="">
         {% csrf_token %}
 
         {% if subscription_form_status == 'failed' %}
