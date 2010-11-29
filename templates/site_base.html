@@ -1,6 +1,6 @@
 {% load i18n tagging_tags planet_tags %}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
 <head>
     <title>{% block page_title %}{{ site.name }}{% endblock %}</title>
@@ -126,8 +126,8 @@ a:hover {
     {% trans 'search in' %}
     </h4>
     <form name="search_form" id="search_form" action="{% url planet_search %}" method="get">
-        {{ search_form }}
-        <button name="search" value="go">{% trans 'go' %}</button>
+        {{ search_form.as_p }}
+        <input type="submit" name="search" value="go" />
     </form>
 {% endblock %}
 				<!-- Column 2 end -->
