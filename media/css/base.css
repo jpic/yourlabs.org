@@ -4,14 +4,21 @@ Source: http://bitbucket.org/montylounge/django-mingus/src/tip/mingus/media/stat
 */
 /* http://meyerweb.com/eric/tools/css/reset/ */
 /* v1.0 | 20080212 */
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: transparent;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+fieldset, form, label, legend {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -65,7 +72,6 @@ body {
 .post-img p { margin-left: 3.8em; line-height: 1.4em; }
 .post-img { float: left; margin: 0.3em 0 1.2em -6.0em; }
 
-.post li { padding-bottom: .6em; }
 .post ol li { list-style: decimal; }
 
 /* CODE */
@@ -75,7 +81,6 @@ pre
 	overflow: auto;
 	z-index: 0;
 	background-color: #fff;
-	padding: .6em 0em .6em .6em;
 	display: block;
 	width: 100%;
 	border: 0px solid #ccc;
@@ -91,7 +96,7 @@ code
 
 #header, #footer
 {
-	margin-left: 80px;
+	padding-left: 80px;
 	width: 960px;
 	margin-bottom: 15px;
     padding-bottom: 1.0em;
@@ -109,9 +114,15 @@ ul ul { margin-bottom: 0; }
 h2, h3, h4, h5 { margin: 1em 0 0.2em; font-weight: bold; }
 h2 { margin: 0.25em 0 .2em; font-size: 1.8em; letter-spacing: -0.025em; line-height: 1.2em; font-weight: 100; }
 h1 { margin: 0.25em 0 .2em; font-size: 2.3em; letter-spacing: -0.025em; line-height: 1.5em; font-weight: 100; }
-h3 { font-size: 1em; margin-bottom: 0.25em; font-weight: normal; }
+h3 { font-size: 1.1em; margin-bottom: 0.25em; font-weight: normal; }
 h4 { font-size: 0.875em; }
 label, p, li { font-size: .9em; line-height: 1.4em; }
+.col1 ol, .col1 li {
+    margin-left: 1em;
+}
+.col1 li {
+    list-style-type: square;
+}
 
 /* TYPE SPECIFIC */
 .post p { font-size: 0.9em; line-height: 1.2em;}
@@ -138,7 +149,7 @@ a.external { background: transparent url(../icons/external.gif) no-repeat right 
 div.post { border-bottom: #33493c 1px solid; padding-bottom: 20px; }
 div.post p.tags.list { font-size: 0.85em; text-transform: lowercase; }
 div.pagination { text-align: center; margin-top: 1.5em; }
-div.post div.content { border-top: #33493c 1px solid; padding-top: 0.7em; font-size: 0.8em; }
+/* div.post div.content { border-top: #33493c 1px solid; padding-top: 0.7em; font-size: 0.8em; } */
 
 div.tags.cloud a.level1 { font-size: 0.5em; font-weight: 50; opacity: 0.7; }
 div.tags.cloud a.level2 { font-size: 0.7em; font-weight: 70; opacity: 0.8; }

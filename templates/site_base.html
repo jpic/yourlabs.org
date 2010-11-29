@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 {% load i18n tagging_tags planet_tags %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
 <head>
     <title>{% block page_title %}{{ site.name }}{% endblock %}</title>
@@ -25,6 +26,10 @@
 
     {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
+    {% block extra_head_base %}
+        {% block extra_head %}{% endblock %}
+    {% endblock %}
+
     <style type="text/css">
 .col2 {
     padding-top: 60px;
@@ -39,8 +44,17 @@ div.box span.title {
     margin: 1em 0 0.2em; font-weight: bold;
     margin: 0.25em 0 .2em; font-size: 1.8em; letter-spacing: -0.025em; line-height: 1.2em; font-weight: 100;
 }
-
+blockquote {
+  font: 14px/22px normal helvetica, sans-serif;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  border-left: 3px solid #ccc;
+} 
+a:hover {
+  color: #930686;
+}
     </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}uni_form/uni-form.css" />
 </head>
 <body>
 
@@ -94,14 +108,24 @@ div.box span.title {
         <li>
             <a title="{% trans "IT development and business tags" %}" href="{% url planet_tag_cloud %}">{% trans 'tag cloud' %}</a>
         </li>
-        {% block menu_extra %}
-        {% endblock %}
+        
     </ul>
+    {% block menu_extra %}
+    {% endblock %}
+
+    {% if request.user.is_authenticated %}
+    <h4>subnav</h4>
+    {% block subnav %}
+    {% endblock %}
+    {% endif %}
+
 {% endblock %}
 
 {% block search %}
-    <form name="search_form" id="search_form" action="{% url planet_search %}" method="GET">
-        <label>{% trans 'search in' %}</label>
+    <h4>
+    {% trans 'search in' %}
+    </h4>
+    <form name="search_form" id="search_form" action="{% url planet_search %}" method="get">
         {{ search_form }}
         <button name="search" value="go">{% trans 'go' %}</button>
     </form>
@@ -130,12 +154,12 @@ div.box span.title {
             </li>
             <li>
                 <a href="{% url planet_opml %}" title="OPML">
-                    <img src="{{ MEDIA_URL }}images/button-opml.png"/>
+                    <img src="{{ MEDIA_URL }}images/button-opml.png" alt="OPML" />
                 </a>
             </li>
             <li>
                 <a href="{% url planet_foaf %}" title="FOAF">
-                    <img src="{{ MEDIA_URL }}images/button-foaf.png"/>
+                    <img src="{{ MEDIA_URL }}images/button-foaf.png" alt="FOAF"/>
                 </a>
             </li>
         </ul>
@@ -150,14 +174,28 @@ div.box span.title {
 </div>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.4.2.min.js"></script>
+<script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('.hide_parent').live('click', function(e) {
         e.preventDefault();
         $(this).parent().fadeOut();
     });
+
+    $.expr[':'].external = function(obj){
+        return !obj.href.match(/^mailto\:/)
+                && (obj.hostname != location.hostname);
+    };
+    
+    // Add 'external' CSS class to all external links
+    $('.col1 a:external').addClass('external');
 });
 </script>
+
+{% block extra_body_base %}
+{% block extra_body %}
+{% endblock %}
+{% endblock %}
 
 </body>
 </html>

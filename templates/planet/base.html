@@ -6,6 +6,21 @@
 {% endblock %}
 
 
+{% block extra_head %}
+<script src="{{ STATIC_URL }}highlight/highlight.pack.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e, '  ')});
+});
+</script>
+<link rel="stylesheet" href="{{ STATIC_URL }}highlight/styles/ir_black.css" />
+<style type="text/css">
+pre {
+    text-align: left;
+}
+</style>
+{% endblock %}
+
 {% block right_column %}
     {% tag_cloud_for_model planet.Post as tags_cloud with steps=7 min_count=5 distribution=log %}
     {% include 'planet/tags/blocks/cloud.html' %}
