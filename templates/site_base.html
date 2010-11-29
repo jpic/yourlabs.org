@@ -3,21 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
 <head>
     <title>{% block page_title %}{{ site.name }}{% endblock %}</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<meta name="description" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." />
-	<meta name="keywords" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." />
-	<meta name="robots" content="index, follow" />
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"></meta>
+	<meta name="description" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." ></meta>
+	<meta name="keywords" content="The Perfect 3 Column Liquid Layout: No CSS hacks. SEO friendly. iPhone compatible." ></meta>
+	<meta name="robots" content="index, follow" ></meta>
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/screen.css" media="screen" />
 {% block extrameta %}
-    <meta name="DC.title" content="{{ site.name }}" />
-    <meta name="generator" content="django-planet http://github.com/matagus/django-planet/tree">
+    <meta name="DC.title" content="{{ site.name }}" ></meta>
+    <meta name="generator" content="django-planet http://github.com/matagus/django-planet/tree"></meta>
 {% endblock %}    
-    <meta http-equiv="content-language" content="en" />
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8">
-    <link href="{{ STATIC_URL }}icons/shortcut.ico" rel="SHORTCUT ICON">
-    <link rel="meta" type="application/rdf+xml" title="FOAF" href="{% url planet_foaf %}" /> 
+    <meta http-equiv="content-language" content="en" ></meta>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"></meta>
+    <link href="{{ STATIC_URL }}icons/shortcut.ico" rel="SHORTCUT ICON" />
+    <link rel="meta" type="application/rdf+xml" title="FOAF" href="{% url planet_foaf %}" />
 
 {% block head_feeds %}
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {% trans "All incoming news" %}" href="{% url planet_rss_feed %}" />
