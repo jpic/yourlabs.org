@@ -27,7 +27,7 @@ ol.posts li {
 {% block extrameta %}
 {{ block.super }}
 <meta name="description" content="{{ object.text|capfirst }}" />
-<meta name="keywords" content="{% for part in object.fanzinepart_set.all %}{{ part.tag }},{% endfor %}" />
+<meta name="keywords" content="{% for part in object.fanzinepart_set.all.select_related %}{{ part.tag }},{% endfor %}" />
 {% endblock %}
 
 {% block body %}
@@ -47,7 +47,7 @@ ol.posts li {
     </div>
     
     <div class="parts">
-    {% for part in object.fanzinepart_set.all %}
+    {% for part in object.fanzinepart_set.all.select_related %}
         <div class="part">
             <h2 class="title">
                 <a href="{% url planet_tag_detail part.tag.name %}" title="{% trans 'see all posts tagged' %} '{{ part.tag.name }}'">
@@ -58,7 +58,7 @@ ol.posts li {
                 {{ part.text|capfirst|markdown }}
             </p>
             <ol class="posts">
-            {% for partpost in part.fanzinepartpost_set.all %}
+            {% for partpost in part.fanzinepartpost_set.all.select_related %}
                 <li class="post">
                     <a href="{{ partpost.post.url }}" title="{{ partpost.post.title }} {% trans "posted on" %} {{ partpost.post.feed.title }}">
                         {{ partpost.post.title }}
