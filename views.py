@@ -21,7 +21,7 @@ def planet_post_detail(request, post_id):
         pass
 
     return shortcuts.render_to_response("planet/posts/detail.html", {"post": post},
-        context_instance=RequestContext(request))
+        context_instance=template.RequestContext(request))
 
 def form(request, 
          form_class=None, 
