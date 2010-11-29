@@ -31,6 +31,9 @@
     {% endblock %}
 
     <style type="text/css">
+ul.messages li {
+    list-style-type: none;
+}
 .col2 {
     padding-top: 60px;
     text-align: right;
@@ -39,7 +42,7 @@
     padding-top: 60px;
 }
 .errorField{ color: #af4c4c; margin: 0 0 6px 0; padding: 4px; background: #ffbfbf; }
-.linklist {display:inline;float:left;margin-left:10px;margin-right:10px; width:300px;}
+.linklist {display:inline;float:left; width:300px;}
 div.box span.title {
     margin: 1em 0 0.2em; font-weight: bold;
     margin: 0.25em 0 .2em; font-size: 1.8em; letter-spacing: -0.025em; line-height: 1.2em; font-weight: 100;
@@ -82,12 +85,58 @@ a:hover {
 
     <h4>{% trans 'editions' %}</h4>
     <ul>
+        {% for fanzine in previous_fanzines %}
         <li>
-            <a href="{% url home %}" title="{% trans "view the current edition" %}">
-                {% trans "current" %}
+            <a href="{{ fanzine.get_absolute_url }}" title="{{ fanzine.title }} ({{ fanzine.date }})">
+                {{ fanzine.title }} {% if forloop.first %}({% trans "current" %}){% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if request.user.is_staff %}
+    <h4>{% trans 'next editions' %}</h4>
+    <ul>
+        {% for fanzine in next_fanzines %}
+        <li>
+            <a href="{{ fanzine.get_absolute_url }}" title="{{ fanzine.title }} ({{ fanzine.date }})">
+                {{ fanzine.title }} {% if forloop.first %}({% trans "latest" %}){% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h4>{% trans 'blog' %}</h4>
+    <ul>
+        {% for post in previous_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}" title="{{ post.title }} ({{ post.date }})">
+                {{ post.title }} {% if forloop.first %}({% trans "next" %}){% endif %}
+            </a>
+        </li>
+        {% endfor %}   
+        <li>
+            <a href="{% url blog_list_all %}" title="{% trans "all local blog posts" %}">
+                {% trans "all local blog posts" %}
             </a>
         </li>
     </ul>
+
+    {% if request.user.is_staff %}
+    <h4>{% trans 'blog' %}: {% trans 'next posts' %}</h4>
+    <ul>
+        {% for post in next_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}" title="{{ post.title }} ({{ post.date }})">
+                {{ post.title }} {% if forloop.first %}({% trans "next" %}){% endif %}
+            </a>
+        </li>
+        {% endfor %}   
+    </ul>
+    {% endif %}
+
+
 
     <h4>{% trans 'all contents' %}</h4>
 

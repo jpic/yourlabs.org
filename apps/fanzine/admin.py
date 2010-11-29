@@ -67,12 +67,14 @@ class FanzineAdminForm(forms.ModelForm):
 class FanzineAdmin(admin.ModelAdmin):
     form = FanzineAdminForm
     list_display = (
+        'id',
         'date',
         'title',
+        'slug',
         'text',
     )
     list_display_links = (
-        'title',
+        'id',
     )
     search_fields = (
         'title',
@@ -83,6 +85,9 @@ class FanzineAdmin(admin.ModelAdmin):
     )
     list_editable = (
         'date',
+        'title',
+        'slug',
+        'text',
     )
     inlines = (
         FanzinePartInline,
